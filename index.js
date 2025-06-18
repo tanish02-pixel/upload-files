@@ -1,7 +1,7 @@
-import express from "express";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
+import express from "express";
+import mongoose from "mongoose";
 import path from "path";
 import multer from "multer";
 import File from "./model/file.js";
