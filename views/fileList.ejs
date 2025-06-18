@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Uploaded Files</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(to right, #74ebd5, #acb6e5);
+      margin: 0;
+      padding: 40px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+    }
+
+    .file-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .file-card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .file-card:hover {
+      transform: scale(1.03);
+    }
+
+    .thumbnail {
+      font-size: 80px;
+      margin-bottom: 15px;
+    }
+
+    .preview-img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .download-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #6c63ff;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .download-btn:hover {
+      background: #574b90;
+    }
+
+    .back-btn {
+      display: block;
+      margin: 20px auto 0;
+      width: fit-content;
+      padding: 10px 20px;
+      background: #ff7675;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .back-btn:hover {
+      background: #d63031;
+    }
+  </style>
+</head>
+<body>
+  <h1>🗃️ Uploaded Files</h1>
+
+  <div class="file-grid">
+    <% files.forEach(file => { 
+      const ext = file.originalName.split('.').pop().toLowerCase();
+    %>
+      <div class="file-card">
+        <% if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)) { %>
+          <img src="/<%= file.path %>" class="preview-img" alt="Image Preview">
+        <% } else { %>
+          <div class="thumbnail">📄</div>
+        <% } %>
+
+        <p><strong><%= file.originalName %></strong></p>
+        <p><%= (file.size / (1024 * 1024)).toFixed(2) %> MB</p>
+        <a class="download-btn" href="/download/<%= file._id %>">⬇️ Download</a>
+      </div>
+    <% }) %>
+  </div>
+
+  <a href="/" class="back-btn">⬅️ Back to Upload</a>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Upload Success</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(to right top, #9185FF, #BFB0FF);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .success-container {
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    h1 {
+      color: #27ae60;
+      font-size: 1.7rem;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #444;
+      margin: 8px 0;
+      word-wrap: break-word;
+    }
+
+    img {
+      margin-top: 15px;
+      border-radius: 12px;
+      max-width: 100%;
+      height: auto;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    img:hover {
+      transform: scale(1.02);
+    }
+
+    .file-icon {
+      font-size: 60px;
+      margin-top: 15px;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 26px;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    a:hover {
+      background: linear-gradient(to right, #5a67d8, #6b46c1);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="success-container">
+    <h1>✅ File Uploaded Successfully!</h1>
+    <p><strong>Original Name:</strong> <%= file.originalName %></p>
+    <p><strong>Size:</strong> <%= (file.size / (1024 * 1024)).toFixed(2) %> MB</p>
+    <p><strong>Uploaded File Preview:</strong></p>
+
+    <% 
+      const ext = file.originalName.split('.').pop().toLowerCase();
+      const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext);
+    %>
+
+    <% if (isImage) { %>
+      <img src="/<%= file.path %>" alt="Uploaded File Preview" />
+    <% } else { %>
+      <div class="file-icon">📄</div>
+    <% } %>
+
+    <a href="/">⬅ Back to Upload</a>
+  </div>
+</body>
+</html>
