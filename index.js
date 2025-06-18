@@ -1,10 +1,15 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
+import  connectDB  from './connect.js';
 import mongoose from "mongoose";
 import path from "path";
 import multer from "multer";
 import File from "./model/file.js";
+
+// 1️⃣ connect to your database first
+await connectDB(process.env.MONGO_URL)
+
 
 
 const app = express();
